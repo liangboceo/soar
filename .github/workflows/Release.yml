@@ -57,7 +57,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: release/soar_darwin_amd64.tar.gz
-        asset_name: soar_${{ github.event.inputs.version }}_darwin_amd64.tar.gz
+        asset_name: soar_darwin_amd64.tar.gz
         asset_content_type: application/octet-stream
 
     - name: Upload a Release Asset
@@ -67,7 +67,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: release/soar_darwin_arm64.tar.gz
-        asset_name: soar_${{ github.event.inputs.version }}_darwin_armd64.tar.gz
+        asset_name: soar_darwin_arm64.tar.gz
         asset_content_type: application/octet-stream
     - name: Upload a Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -76,7 +76,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: release/soar_linux_amd64.tar.gz
-        asset_name: soar_${{ github.event.inputs.version }}_linux_amd64.tar.gz
+        asset_name: soar_linux_amd64.tar.gz
         asset_content_type: application/octet-stream
     - name: Upload a Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -85,5 +85,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: release/soar_windows_amd64.tar.gz
-        asset_name: soar_${{ github.event.inputs.version }}_windows_amd64.tar.gz
+        asset_name: soar_windows_amd64.tar.gz
         asset_content_type: application/octet-stream
