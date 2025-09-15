@@ -25,7 +25,7 @@ jobs:
         fi
 
     - name: Build
-      run: go test -v ./tests/
+      run: make
     
 #    - name: Invoke deployment hook
 #      uses: joelwmale/webhook-action@1.0.0
