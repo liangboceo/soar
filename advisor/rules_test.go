@@ -20,7 +20,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/XiaoMi/soar/common"
+	"github.com/liangboceo/soar/common"
 )
 
 func TestListTestSQLs(t *testing.T) {

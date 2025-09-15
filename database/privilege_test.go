@@ -19,7 +19,7 @@ package database
 import (
 	"testing"
 
-	"github.com/XiaoMi/soar/common"
+	"github.com/liangboceo/soar/common"
 )
 
 func TestCurrentUser(t *testing.T) {
