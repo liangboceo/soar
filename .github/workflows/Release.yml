@@ -37,7 +37,7 @@ jobs:
         fi
     - name: Build
       run: 
-          make build VERSION=${{ github.event.inputs.version }}
+          make release VERSION=${{ github.event.inputs.version }}
     - name: Create a Release
       id: create_release
       uses: actions/create-release@v1
@@ -56,8 +56,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_darwin_386.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_darwin_386.tar.gz
+        asset_path: release/soar_darwin_amd64.tar.gz
+        asset_name: soar_${{ github.event.inputs.version }}_darwin_amd64.tar.gz
         asset_content_type: application/octet-stream
 
     - name: Upload a Release Asset
@@ -66,39 +66,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_darwin_amd64.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_darwin_amd64.tar.gz
-        asset_content_type: application/octet-stream
-
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_freebsd_386.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_freebsd_386.tar.gz
-        asset_content_type: application/octet-stream
-
-
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_freebsd_amd64.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_freebsd_amd64.tar.gz
-        asset_content_type: application/octet-stream
-
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_linux_386.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_linux_386.tar.gz
+        asset_path: release/soar_darwin_arm64.tar.gz
+        asset_name: soar_${{ github.event.inputs.version }}_darwin_armd64.tar.gz
         asset_content_type: application/octet-stream
     - name: Upload a Release Asset
       uses: actions/upload-release-asset@v1.0.2
@@ -106,26 +75,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_linux_amd64.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_linux_amd64.tar.gz
+        asset_path: release/soar_linux_amd64.tar.gz
+        asset_name: soar_${{ github.event.inputs.version }}_linux_amd64.tar.gz
         asset_content_type: application/octet-stream
-
     - name: Upload a Release Asset
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_windows_386.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_windows_386.tar.gz
-        asset_content_type: application/octet-stream
-
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: cli/yuanbootctl/yuanbootctl_${{ github.event.inputs.version }}_windows_amd64.tar.gz
-        asset_name: yuanbootctl_${{ github.event.inputs.version }}_windows_amd64.tar.gz
+        asset_path: release/soar_windows_amd64.tar.gz
+        asset_name: soar_${{ github.event.inputs.version }}_windows_amd64.tar.gz
         asset_content_type: application/octet-stream

@@ -4,6 +4,7 @@
 # $ checkmake Makefile
 #
 BINARY=soar
+VERSION="0.0.1-preview1"
 GOPATH ?= $(shell go env GOPATH)
 GO111MODULE:=auto
 export GO111MODULE
@@ -14,7 +15,7 @@ endif
 PATH := ${GOPATH}/bin:$(PATH)
 GCFLAGS=-gcflags "all=-trimpath=${GOPATH}"
 VERSION_TAG := $(shell git describe --tags --always)
-VERSION_VERSION := $(shell git log --date=iso --pretty=format:"%cd" -1) $(VERSION_TAG)
+VERSION_VERSION := 1.0.0
 VERSION_COMPILE := $(shell date +"%F %T %z") by $(shell go version)
 VERSION_BRANCH  := $(shell git rev-parse --abbrev-ref HEAD)
 VERSION_GIT_DIRTY := $(shell git diff --no-ext-diff 2>/dev/null | wc -l | awk '{print $1}')
@@ -158,13 +159,18 @@ lint: build
 .PHONY: release
 release: build
 	@echo "$(CGREEN)Cross platform building for release ...$(CEND)"
+	@rm -rf release
 	@mkdir -p release
 	@for GOOS in linux windows; do \
 		for GOARCH in amd64; do \
 			for d in $$(go list -f '{{if (eq .Name "main")}}{{.ImportPath}}{{end}}' ./...); do \
 				b=$$(basename $${d}) ; \
 				echo "Building $${b}.$${GOOS}-$${GOARCH} ..."; \
-				CGO_ENABLED=0 GOOS=$${GOOS} GOARCH=$${GOARCH} go build ${GCFLAGS} ${LDFLAGS} -v -o release/$${b}.$${GOOS}-$${GOARCH} $$d 2>/dev/null ; \
+				tgzName="$${b}_$${GOOS}_$${GOARCH}.tar.gz";\
+				CGO_ENABLED=0 GOOS=$${GOOS} GOARCH=$${GOARCH} go build ${GCFLAGS} ${LDFLAGS} -v -o release/$${b} $$d 2>/dev/null ; \
+				rm -f "release/$${tgzName}";\
+			    tar -czf "release/$${tgzName}" "release/$${b}";\
+                rm -f "release/$${b}";\
 			done ; \
 		done ;\
 	done
@@ -173,7 +179,11 @@ release: build
 			for d in $$(go list -f '{{if (eq .Name "main")}}{{.ImportPath}}{{end}}' ./...); do \
 				b=$$(basename $${d}) ; \
 				echo "Building $${b}.$${GOOS}-$${GOARCH} ..."; \
-				CGO_ENABLED=0 GOOS=$${GOOS} GOARCH=$${GOARCH} go build ${GCFLAGS} ${LDFLAGS} -v -o release/$${b}.$${GOOS}-$${GOARCH} $$d 2>/dev/null ; \
+				tgzName="$${b}_$${GOOS}_$${GOARCH}.tar.gz";\
+				CGO_ENABLED=0 GOOS=$${GOOS} GOARCH=$${GOARCH} go build ${GCFLAGS} ${LDFLAGS} -v -o release/$${b} $$d 2>/dev/null ; \
+				rm -f "release/$${tgzName}";\
+                tar -czf "release/$${tgzName}" "release/$${b}";\
+                rm -f "release/$${b}";\
 			done ; \
 		done ;\
 	done
